@@ -1,4 +1,4 @@
-package com.crownedjester.soft.pokedexapp.ui.theme
+package com.crownedjester.soft.pokedexapp.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
