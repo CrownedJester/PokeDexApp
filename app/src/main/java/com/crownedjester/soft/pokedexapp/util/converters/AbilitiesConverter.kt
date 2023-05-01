@@ -17,6 +17,7 @@ class AbilitiesConverter : Converter<Abilities> {
         return adapter.fromJson(value)
     }
 
+    @TypeConverter
     override fun encodeToString(value: Abilities): String {
         val adapter: JsonAdapter<Abilities> = moshi.adapter(Abilities::class.java)
 
