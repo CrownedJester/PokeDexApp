@@ -13,6 +13,7 @@ import com.crownedjester.soft.pokedexapp.data.remote.responses.type.TypeDto
 
 fun PokemonDetailsDto.toPokemonEntity() = PokemonEntity(
     id = id,
+    name = name,
     height = height,
     weight = weight,
     type = typesDto.toTypes(),
