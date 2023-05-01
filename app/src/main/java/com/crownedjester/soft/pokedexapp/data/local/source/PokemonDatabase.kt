@@ -10,7 +10,8 @@ import com.crownedjester.soft.pokedexapp.util.converters.TypesConverter
 
 @Database(
     entities = [PokemonEntity::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 @TypeConverters(AbilitiesConverter::class, TypesConverter::class, StatConverter::class)
 abstract class PokemonDatabase : RoomDatabase() {

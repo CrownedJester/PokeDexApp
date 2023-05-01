@@ -1,6 +1,7 @@
 package com.crownedjester.soft.pokedexapp
 
-import com.crownedjester.soft.pokedexapp.util.PokemonDataParser
+import com.crownedjester.soft.pokedexapp.util.ID_PARSER_ERROR_RESPONSE
+import com.crownedjester.soft.pokedexapp.util.parseId
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -12,11 +13,19 @@ import org.junit.Test
 class UtilUnitTest {
 
     @Test
-    fun pokeId_parser_isCorrect() {
-        val urlToTest = "https://pokeapi.co/api/v2/pokemon/122/"
+    fun parserId_isCorrect() {
+        val url = "https://pokeapi.co/api/v2/pokemon/122/"
 
-        assertEquals(122, PokemonDataParser.parseId(urlToTest))
+        assertEquals(122, url.parseId())
 
+    }
+
+    @Test
+    fun parseId_emptyData_isCorrect() {
+        val url = ""
+        val expected = ID_PARSER_ERROR_RESPONSE
+
+        assertEquals(expected, url.parseId())
     }
 
 
