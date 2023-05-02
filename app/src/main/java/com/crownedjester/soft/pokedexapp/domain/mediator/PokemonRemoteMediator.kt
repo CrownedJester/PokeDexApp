@@ -24,14 +24,10 @@ class PokemonRemoteMediator(
     ): MediatorResult {
         return try {
             val loadKey = when (loadType) {
-                LoadType.REFRESH -> 1
+                LoadType.REFRESH -> 0
                 LoadType.APPEND -> {
                     val lastItem = state.lastItemOrNull()
-                    if (lastItem == null) {
-                        1
-                    } else {
-                        (lastItem.id / state.config.pageSize) + 1
-                    }
+                    lastItem?.id ?: 0
                 }
 
                 LoadType.PREPEND -> return MediatorResult.Success(
@@ -40,7 +36,7 @@ class PokemonRemoteMediator(
             }
 
             val pokemonResultDto = api.retrievePokemonList(
-                loadKey, state.config.pageSize
+                limit = state.config.pageSize, offset = loadKey
             )
             val pokemonDetailsList = pokemonResultDto.results.map {
                 api.retrievePokemonDetails(it.url.parseId())
