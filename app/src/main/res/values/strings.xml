@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PokeDexApp</string>
+    <string name="try_again">Try Again</string>
+    <string name="loading_bar_message">Please wait a little...</string>
+    <string name="error_message">Sorry, unexpected error occurred</string>
 </resources>
