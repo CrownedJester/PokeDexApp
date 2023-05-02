@@ -78,6 +78,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+
+    //Constraint compose
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
     // Coil Compose
     implementation("io.coil-kt:coil-compose:$coilVersion")
     implementation("io.coil-kt:coil-svg:$coilVersion")
@@ -112,5 +116,6 @@ dependencies {
 
     //Navigation
     implementation("androidx.navigation:navigation-compose:$navigationVersion")
+
 
 }

@@ -40,9 +40,6 @@ fun PokemonItem(
 
     Card(
         modifier = modifier,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = defaultCardElevation, pressedElevation = pressedCardElevation
-        ),
         colors = CardDefaults.cardColors(
             containerColor = cardColor.copy(alpha = cardBgAlpha)
         )
@@ -51,7 +48,7 @@ fun PokemonItem(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(mainRowPadding)
+                .padding(horizontal = mainRowHorizontalPadding, vertical = mainRowVerticalPadding)
         ) {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
@@ -66,7 +63,7 @@ fun PokemonItem(
 
             Spacer(modifier = Modifier.fillMaxWidth(0.1f))
 
-            Column {
+            Column(modifier = Modifier, verticalArrangement = Arrangement.Top) {
 
                 Text(
                     text = name.makeFirstUppercase(),
@@ -100,9 +97,9 @@ fun PokemonItem(
 }
 
 
-private val defaultCardElevation = 6.dp
-private val pressedCardElevation = 2.dp
-private val mainRowPadding = 8.dp
+
+private val mainRowVerticalPadding = 8.dp
+private val mainRowHorizontalPadding = 14.dp
 private val nameFontSize = 20.sp
 private val typeItemsArrangement = 6.dp
 private val imageSize = 96.dp
