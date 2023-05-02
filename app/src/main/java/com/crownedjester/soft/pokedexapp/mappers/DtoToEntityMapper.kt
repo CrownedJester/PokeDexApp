@@ -16,10 +16,10 @@ fun PokemonDetailsDto.toPokemonEntity() = PokemonEntity(
     name = name,
     height = height,
     weight = weight,
-    type = typesDto.toTypes(),
-    stats = statsDto.toStats(),
-    abilities = abilitiesDto.toAbilities(),
-    art = sprites.other.dreamWorld.artUrl ?: sprites.defaultArt
+    type = types.toTypes(),
+    stats = stats.toStats(),
+    abilities = abilities.toAbilities(),
+    art = sprites.other.dream_world.front_default ?: sprites.front_default
 )
 
 fun List<TypeDto>.toTypes(): Types = Types(
@@ -37,9 +37,11 @@ fun List<StatsDto>.toStats(): Stats = Stats(
 )
 
 
-fun List<AbilitiesDto>.toAbilities(): Abilities = Abilities(map {
-    Ability(
-        name = it.ability.name, isHidden = it.isHidden
-    )
-})
+fun List<AbilitiesDto>.toAbilities(): Abilities = Abilities(
+    map {
+        Ability(
+            name = it.ability.name, isHidden = it.isHidden
+        )
+    }
+)
 

@@ -4,12 +4,10 @@ import androidx.room.TypeConverter
 import com.crownedjester.soft.pokedexapp.data.local.entity.Stats
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import javax.inject.Inject
 
 class StatConverter : Converter<Stats> {
 
-    @Inject
-    lateinit var moshi: Moshi
+    private val moshi: Moshi = Moshi.Builder().build()
 
     @TypeConverter
     override fun decodeFromString(value: String): Stats? {
