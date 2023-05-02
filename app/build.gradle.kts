@@ -80,6 +80,7 @@ dependencies {
 
     // Coil Compose
     implementation("io.coil-kt:coil-compose:$coilVersion")
+    implementation("io.coil-kt:coil-svg:$coilVersion")
 
     //Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
