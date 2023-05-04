@@ -78,8 +78,15 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    //Icons
+    implementation("androidx.compose.material:material-icons-extended")
+
+    //Constraint compose
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
     // Coil Compose
     implementation("io.coil-kt:coil-compose:$coilVersion")
+    implementation("io.coil-kt:coil-svg:$coilVersion")
 
     //Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion")
@@ -111,5 +118,9 @@ dependencies {
 
     //Navigation
     implementation("androidx.navigation:navigation-compose:$navigationVersion")
+
+    //Pager
+    implementation("com.google.accompanist:accompanist-pager:0.30.1")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.30.1")
 
 }

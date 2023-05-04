@@ -9,6 +9,10 @@ import com.crownedjester.soft.pokedexapp.data.local.entity.PokemonEntity
 import com.crownedjester.soft.pokedexapp.data.local.source.PokemonDatabase
 import com.crownedjester.soft.pokedexapp.data.remote.PokeApi
 import com.crownedjester.soft.pokedexapp.domain.mediator.PokemonRemoteMediator
+import com.crownedjester.soft.pokedexapp.domain.repository.local.LocalSourceRepository
+import com.crownedjester.soft.pokedexapp.domain.repository.local.LocalSourceRepositoryImpl
+import com.crownedjester.soft.pokedexapp.domain.repository.remote.RemoteSourceRepository
+import com.crownedjester.soft.pokedexapp.domain.repository.remote.RemoteSourceRepositoryImpl
 import com.crownedjester.soft.pokedexapp.util.PAGE_SIZE
 import dagger.Module
 import dagger.Provides
@@ -50,13 +54,15 @@ object AppModule {
     @Provides
     @Singleton
     fun providesPokemonPager(
-        pokeApi: PokeApi,
+        localRepository: LocalSourceRepository,
+        remoteRepository: RemoteSourceRepository,
         pokemonDb: PokemonDatabase
     ): Pager<Int, PokemonEntity> =
         Pager(
             config = PagingConfig(pageSize = PAGE_SIZE),
             remoteMediator = PokemonRemoteMediator(
-                api = pokeApi,
+                remoteSourceRepository = remoteRepository,
+                localSourceRepository = localRepository,
                 pokemonDb = pokemonDb
             ),
             pagingSourceFactory = {
@@ -64,7 +70,17 @@ object AppModule {
             }
         )
 
+    @Singleton
+    @Provides
+    fun providesRemoteSourceRepository(api: PokeApi): RemoteSourceRepository {
+        return RemoteSourceRepositoryImpl(api)
+    }
 
+    @Singleton
+    @Provides
+    fun providesLocalSourceRepository(pokemonDb: PokemonDatabase): LocalSourceRepository {
+        return LocalSourceRepositoryImpl(pokemonDb.dao)
+    }
 
 
 }

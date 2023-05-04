@@ -17,7 +17,7 @@ class MapperUnitTest {
             TypeDto(1, TypeDetailDto("c", "b")),
         )
 
-        Assert.assertEquals(expected, data.toTypes().types)
+        Assert.assertEquals(expected, data.toTypes().data)
 
     }
 
@@ -26,7 +26,7 @@ class MapperUnitTest {
         val expected = emptyList<String>()
         val data = emptyList<TypeDto>()
 
-        Assert.assertEquals(expected, data.toTypes().types)
+        Assert.assertEquals(expected, data.toTypes().data)
 
     }
 

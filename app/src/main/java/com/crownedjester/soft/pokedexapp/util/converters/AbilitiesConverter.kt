@@ -4,12 +4,10 @@ import androidx.room.TypeConverter
 import com.crownedjester.soft.pokedexapp.data.local.entity.Abilities
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import javax.inject.Inject
 
 class AbilitiesConverter : Converter<Abilities> {
 
-    @Inject
-    lateinit var moshi: Moshi
+    private val moshi: Moshi = Moshi.Builder().build()
 
 
     @TypeConverter

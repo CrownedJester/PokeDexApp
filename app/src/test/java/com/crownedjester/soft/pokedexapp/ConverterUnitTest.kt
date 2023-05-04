@@ -25,7 +25,7 @@ class ConverterUnitTest {
             )
         )
 
-        assertEquals(expected.types, typesConverter.decodeFromString(encodedData)?.types)
+        assertEquals(expected.data, typesConverter.decodeFromString(encodedData)?.data)
 
     }
 

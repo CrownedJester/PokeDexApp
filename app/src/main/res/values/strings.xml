@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">PokeDexApp</string>
+    <string name="try_again">Try Again</string>
+    <string name="loading_bar_message">Please wait a little\.\.\.</string>
+    <string name="error_message">Sorry, unexpected error occurred</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="about">About</string>
+    <string name="exit_message">Press again to exit</string>
+    <string name="clear_cash">Clear cash</string>
+    <string name="empty_list_message">There\'s no items. Enable network to fetch newly items!</string>
+    <string name="dialog_message">Are you sure want to clean up all data?</string>
+    <string name="dialog_title">Cache Deletion</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="connection_restored_message">Connection Restored!</string>
+    <string name="connection_lost_message">Connection Lost!</string>
+    <string name="loading_data_message">Fetching Data\.\.\.</string>
 </resources>

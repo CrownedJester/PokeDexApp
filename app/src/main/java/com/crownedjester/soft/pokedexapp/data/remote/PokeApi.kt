@@ -15,7 +15,7 @@ interface PokeApi {
 
         val httpClient = with(OkHttpClient.Builder()) {
             val logging = HttpLoggingInterceptor()
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+            logging.setLevel(HttpLoggingInterceptor.Level.HEADERS)
             addInterceptor(logging)
             build()
         }

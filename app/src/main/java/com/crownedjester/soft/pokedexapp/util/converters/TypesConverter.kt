@@ -4,12 +4,11 @@ import androidx.room.TypeConverter
 import com.crownedjester.soft.pokedexapp.data.local.entity.Types
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import javax.inject.Inject
 
 class TypesConverter : Converter<Types> {
 
-    @Inject
-    lateinit var moshi: Moshi
+
+    private val moshi: Moshi = Moshi.Builder().build()
 
     @TypeConverter
     override fun decodeFromString(value: String): Types? {

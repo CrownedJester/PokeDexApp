@@ -13,12 +13,13 @@ import com.crownedjester.soft.pokedexapp.data.remote.responses.type.TypeDto
 
 fun PokemonDetailsDto.toPokemonEntity() = PokemonEntity(
     id = id,
+    name = name,
     height = height,
     weight = weight,
-    type = typesDto.toTypes(),
-    stats = statsDto.toStats(),
-    abilities = abilitiesDto.toAbilities(),
-    art = sprites.other.dreamWorld.artUrl ?: sprites.defaultArt
+    type = types.toTypes(),
+    stats = stats.toStats(),
+    abilities = abilities.toAbilities(),
+    art = sprites.other.dream_world.front_default
 )
 
 fun List<TypeDto>.toTypes(): Types = Types(
@@ -30,15 +31,17 @@ fun List<TypeDto>.toTypes(): Types = Types(
 fun List<StatsDto>.toStats(): Stats = Stats(
     map {
         Stat(
-            baseStat = it.baseStat, effort = it.effort, name = it.stat.name
+            baseStat = it.base_stat, effort = it.effort, name = it.stat.name
         )
     }
 )
 
 
-fun List<AbilitiesDto>.toAbilities(): Abilities = Abilities(map {
-    Ability(
-        name = it.ability.name, isHidden = it.isHidden
-    )
-})
+fun List<AbilitiesDto>.toAbilities(): Abilities = Abilities(
+    map {
+        Ability(
+            name = it.ability.name, isHidden = it.is_hidden
+        )
+    }
+)
 
