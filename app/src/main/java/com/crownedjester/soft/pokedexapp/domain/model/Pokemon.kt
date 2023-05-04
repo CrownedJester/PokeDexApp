@@ -13,4 +13,12 @@ data class Pokemon(
     val stats: Stats,
     val abilities: Abilities,
     val art: String
-)
+) {
+
+    companion object {
+        const val HEIGHT_PARAM = "Height"
+        const val WEIGHT_PARAM = "Weight"
+        const val ABILITIES_PARAM = "Abilities"
+    }
+
+}

@@ -20,7 +20,7 @@ import com.crownedjester.soft.pokedexapp.presentation.ui.theme.TypeSteel
 import com.crownedjester.soft.pokedexapp.presentation.ui.theme.TypeWater
 
 data class Types(
-    val types: List<String>
+    val data: List<String>
 ) {
     companion object {
 

@@ -7,14 +7,21 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.crownedjester.soft.pokedexapp.data.local.entity.PokemonEntity
 import com.crownedjester.soft.pokedexapp.mappers.toPokemon
+import com.crownedjester.soft.pokedexapp.presentation.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PokemonViewModel @Inject constructor(
     pager: Pager<Int, PokemonEntity>
 ) : ViewModel() {
+
+    private val _uiEvent = Channel<UiEvent>()
+    val uiEvent = _uiEvent.receiveAsFlow()
 
     val pokemonPagingFlow = pager
         .flow
@@ -23,6 +30,12 @@ class PokemonViewModel @Inject constructor(
 
         }.cachedIn(viewModelScope)
 
+    fun sendEvent(uiEvents: UiEvent) {
+        viewModelScope.launch {
+            _uiEvent.send(uiEvents)
+        }
+
+    }
 
 
 }

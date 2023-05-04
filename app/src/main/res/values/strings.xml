@@ -3,4 +3,7 @@
     <string name="try_again">Try Again</string>
     <string name="loading_bar_message">Please wait a little...</string>
     <string name="error_message">Sorry, unexpected error occurred</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="about">About</string>
+    <string name="exit_message">Press again to exit</string>
 </resources>

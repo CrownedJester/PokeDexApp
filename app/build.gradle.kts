@@ -117,5 +117,8 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-compose:$navigationVersion")
 
+    //Pager
+    implementation("com.google.accompanist:accompanist-pager:0.30.1")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.30.1")
 
 }

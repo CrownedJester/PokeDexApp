@@ -1,4 +1,4 @@
-package com.crownedjester.soft.pokedexapp.presentation.util
+package com.crownedjester.soft.pokedexapp.presentation.common_components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

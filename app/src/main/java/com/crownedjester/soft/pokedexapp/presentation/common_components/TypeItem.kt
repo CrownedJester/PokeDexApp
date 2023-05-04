@@ -1,4 +1,4 @@
-package com.crownedjester.soft.pokedexapp.presentation.dashboard_screen.components
+package com.crownedjester.soft.pokedexapp.presentation.common_components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding

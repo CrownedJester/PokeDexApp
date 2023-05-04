@@ -1,6 +1,6 @@
 package com.crownedjester.soft.pokedexapp.presentation.dashboard_screen
 
-import android.widget.Toast
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,37 +16,44 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 import com.crownedjester.soft.pokedexapp.domain.model.Pokemon
+import com.crownedjester.soft.pokedexapp.presentation.PokemonViewModel
+import com.crownedjester.soft.pokedexapp.presentation.common_components.LoadingScreen
 import com.crownedjester.soft.pokedexapp.presentation.dashboard_screen.components.PokemonItem
-import com.crownedjester.soft.pokedexapp.presentation.util.LoadingScreen
+import com.crownedjester.soft.pokedexapp.presentation.util.Screen
+import com.crownedjester.soft.pokedexapp.presentation.util.UiEvent
+import com.crownedjester.soft.pokedexapp.util.converters.PokemonConverter
 
 @Composable
 fun PokemonDashboardScreen(
     pokemons: LazyPagingItems<Pokemon>,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
 ) {
 
     val context = LocalContext.current
+    val viewModel = viewModel<PokemonViewModel>(context as ComponentActivity)
 
     LaunchedEffect(key1 = pokemons.loadState) {
         when (pokemons.loadState.refresh) {
             is LoadState.Error -> {
-                Toast.makeText(
-                    context,
-                    (pokemons.loadState.refresh as LoadState.Error).error.message,
-                    Toast.LENGTH_LONG
-                ).show()
+                viewModel.sendEvent(
+                    UiEvent.ShowToast(
+                        (pokemons.loadState.refresh as LoadState.Error).error.message.toString(),
+                    )
+                )
             }
 
             is LoadState.Loading -> {
 
             }
 
-            else -> {}
+            else -> {
+
+            }
         }
     }
 
@@ -72,7 +79,12 @@ fun PokemonDashboardScreen(
                     PokemonItem(
                         pokemon = pokemon,
                         modifier = Modifier.clickable {
-                            onClick()
+                            val encodedPokemon = PokemonConverter.encodeToString(pokemon)
+                            viewModel.sendEvent(
+                                UiEvent.Navigate(
+                                    Screen.PokemonDetailScreen.route + "?$encodedPokemon"
+                                )
+                            )
                         }
                     )
                 }

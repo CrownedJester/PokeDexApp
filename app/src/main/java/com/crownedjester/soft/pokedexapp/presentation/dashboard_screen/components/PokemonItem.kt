@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -27,7 +25,7 @@ import coil.request.ImageRequest
 import coil.size.Scale
 import com.crownedjester.soft.pokedexapp.data.local.entity.Types
 import com.crownedjester.soft.pokedexapp.domain.model.Pokemon
-import com.crownedjester.soft.pokedexapp.extensions.makeFirstUppercase
+import com.crownedjester.soft.pokedexapp.presentation.common_components.TypesRow
 
 @Composable
 fun PokemonItem(
@@ -36,7 +34,7 @@ fun PokemonItem(
 
     val (_, name, _, _, types, _, _, art) = pokemon
 
-    val cardColor = Types.typesWithColors[types.types[0]] ?: Color.Transparent
+    val cardColor = Types.typesWithColors[types.data.firstOrNull()] ?: Color.Transparent
 
     Card(
         modifier = modifier,
@@ -66,27 +64,16 @@ fun PokemonItem(
             Column(modifier = Modifier, verticalArrangement = Arrangement.Top) {
 
                 Text(
-                    text = name.makeFirstUppercase(),
+                    text = name,
                     fontSize = nameFontSize,
                     modifier = Modifier.padding(6.dp)
                 )
 
                 Spacer(modifier = Modifier.fillMaxHeight(0.03f))
 
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(
-                        typeItemsArrangement
-                    )
-                ) {
-                    items(types.types) {
-                        TypeItem(
-                            type = it, modifier = Modifier
-                                .size(80.dp, 36.dp)
+                TypesRow(types = types)
 
-                        )
-                    }
-                }
+
             }
 
 
@@ -97,10 +84,8 @@ fun PokemonItem(
 }
 
 
-
 private val mainRowVerticalPadding = 8.dp
 private val mainRowHorizontalPadding = 14.dp
 private val nameFontSize = 20.sp
-private val typeItemsArrangement = 6.dp
 private val imageSize = 96.dp
 private const val cardBgAlpha = 0.8f

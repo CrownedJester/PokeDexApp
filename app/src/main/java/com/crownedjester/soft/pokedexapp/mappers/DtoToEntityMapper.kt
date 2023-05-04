@@ -19,7 +19,7 @@ fun PokemonDetailsDto.toPokemonEntity() = PokemonEntity(
     type = types.toTypes(),
     stats = stats.toStats(),
     abilities = abilities.toAbilities(),
-    art = sprites.other.dream_world.front_default ?: sprites.front_default
+    art = sprites.other.dream_world.front_default
 )
 
 fun List<TypeDto>.toTypes(): Types = Types(
@@ -31,7 +31,7 @@ fun List<TypeDto>.toTypes(): Types = Types(
 fun List<StatsDto>.toStats(): Stats = Stats(
     map {
         Stat(
-            baseStat = it.baseStat, effort = it.effort, name = it.stat.name
+            baseStat = it.base_stat, effort = it.effort, name = it.stat.name
         )
     }
 )
@@ -40,7 +40,7 @@ fun List<StatsDto>.toStats(): Stats = Stats(
 fun List<AbilitiesDto>.toAbilities(): Abilities = Abilities(
     map {
         Ability(
-            name = it.ability.name, isHidden = it.isHidden
+            name = it.ability.name, isHidden = it.is_hidden
         )
     }
 )
