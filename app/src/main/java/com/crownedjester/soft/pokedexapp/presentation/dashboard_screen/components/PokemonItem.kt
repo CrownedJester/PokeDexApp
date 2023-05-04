@@ -17,12 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import coil.size.Scale
+import com.crownedjester.soft.pokedexapp.R
 import com.crownedjester.soft.pokedexapp.data.local.entity.Types
 import com.crownedjester.soft.pokedexapp.domain.model.Pokemon
 import com.crownedjester.soft.pokedexapp.presentation.common_components.TypesRow
@@ -52,6 +54,7 @@ fun PokemonItem(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(art)
                     .scale(Scale.FIT)
+                    .error(drawableResId = R.drawable.image_pokemon_placeholder)
                     .decoderFactory(SvgDecoder.Factory())
                     .build(),
                 contentDescription = "pokemon list art",

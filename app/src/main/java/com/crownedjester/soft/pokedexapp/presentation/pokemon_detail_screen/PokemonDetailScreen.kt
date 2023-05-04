@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -127,7 +128,10 @@ fun PokemonDetailScreen(
             .zIndex(MIDDLE_LAYER_Z_INDEX)
             .background(
                 color = Color.White,
-                shape = RoundedCornerShape(topStart = controlPanelCorner, topEnd = controlPanelCorner)
+                shape = RoundedCornerShape(
+                    topStart = controlPanelCorner,
+                    topEnd = controlPanelCorner
+                )
             )
             .constrainAs(dataPanel) {
                 start.linkTo(bgBox.start)
@@ -138,6 +142,7 @@ fun PokemonDetailScreen(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(art)
                 .scale(Scale.FIT)
+                .error(drawableResId = R.drawable.image_pokemon_placeholder)
                 .decoderFactory(SvgDecoder.Factory())
                 .build(),
             contentDescription = "pokemon full image",
@@ -172,9 +177,8 @@ fun PokemonDetailScreen(
                 .fillMaxWidth(0.9f)
                 .zIndex(TOP_LAYER_Z_INDEX)
                 .constrainAs(pager) {
-                    top.linkTo(pagerTabs.bottom, margin = 20.dp)
+                    top.linkTo(pagerTabs.bottom, margin = 12.dp)
                     start.linkTo(dataPanel.start)
-                    bottom.linkTo((bgBox.bottom))
                 }) { pageInd ->
             when (pageInd) {
                 0 -> PokemonAboutPage(
@@ -183,13 +187,14 @@ fun PokemonDetailScreen(
                     abilities = abilities,
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
+                        .wrapContentHeight()
                 )
 
                 1 -> PokemonStatsPage(
                     stats = stats,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .fillMaxHeight()
+                        .wrapContentHeight()
                         .padding(start = 16.dp)
                 )
             }
@@ -239,7 +244,6 @@ private fun Tabs(pagerState: PagerState, tabs: List<String>, modifier: Modifier 
 private val tabRowIndicatorColor = Color(255, 138, 101, 255)
 private val defaultColor = Color(255, 213, 79, 255)
 private const val BG_ALPHA = 0.8f
-
 private const val LOW_LAYER_Z_INDEX = 0f
 private const val MIDDLE_LAYER_Z_INDEX = 45f
 private const val TOP_LAYER_Z_INDEX = 90f

@@ -24,7 +24,7 @@ fun PokemonAboutPage(
     abilities: Abilities
 ) {
 
-    Column(modifier = modifier.padding(start = 24.dp), verticalArrangement = Arrangement.Top) {
+    Column(modifier = modifier.padding(start = 24.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         InfoEntry(param = Pokemon.HEIGHT_PARAM, data = "$height cm")
 
         InfoEntry(param = Pokemon.WEIGHT_PARAM, data = "${weight / 10f} kg")
