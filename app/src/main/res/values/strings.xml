@@ -6,4 +6,10 @@
     <string name="base_stats">Base Stats</string>
     <string name="about">About</string>
     <string name="exit_message">Press again to exit</string>
+    <string name="clear_cash">Clear cash</string>
+    <string name="empty_list_message">No item yet. Enable network to fetch newly items</string>
+    <string name="dialog_message">Are you sure want to clean up all data?</string>
+    <string name="dialog_title">Cache Deletion</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="dialog_cancel">Cancel</string>
 </resources>

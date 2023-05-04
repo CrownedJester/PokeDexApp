@@ -7,7 +7,8 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.crownedjester.soft.pokedexapp.data.local.entity.PokemonEntity
 import com.crownedjester.soft.pokedexapp.data.local.source.PokemonDatabase
-import com.crownedjester.soft.pokedexapp.data.remote.PokeApi
+import com.crownedjester.soft.pokedexapp.domain.repository.local.LocalSourceRepository
+import com.crownedjester.soft.pokedexapp.domain.repository.remote.RemoteSourceRepository
 import com.crownedjester.soft.pokedexapp.mappers.toPokemonEntity
 import com.crownedjester.soft.pokedexapp.util.parseId
 import retrofit2.HttpException
@@ -15,9 +16,11 @@ import java.io.IOException
 
 @OptIn(ExperimentalPagingApi::class)
 class PokemonRemoteMediator(
-    private val api: PokeApi,
+    private val remoteSourceRepository: RemoteSourceRepository,
+    private val localSourceRepository: LocalSourceRepository,
     private val pokemonDb: PokemonDatabase
 ) : RemoteMediator<Int, PokemonEntity>() {
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, PokemonEntity>
@@ -35,21 +38,24 @@ class PokemonRemoteMediator(
                 )
             }
 
-            val pokemonResultDto = api.retrievePokemonList(
+            val pokemonResultDto = remoteSourceRepository.retrievePokemonList(
                 limit = state.config.pageSize, offset = loadKey
             )
-            val pokemonDetailsList = pokemonResultDto.results.map {
-                api.retrievePokemonDetails(it.url.parseId())
+
+            val pokemonDetailsList = pokemonResultDto.results.map { pokemonDto ->
+                remoteSourceRepository.retrievePokemonDetails(pokemonDto.url.parseId())
             }
 
             pokemonDb.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    pokemonDb.dao.clearAll()
+                    localSourceRepository.clearAll()
                 }
-                val pokemonEntities = pokemonDetailsList.map {
-                    it.toPokemonEntity()
+
+                val pokemonEntities = pokemonDetailsList.map { pokemonDto ->
+                    pokemonDto.toPokemonEntity()
                 }
-                pokemonDb.dao.upsertAll(pokemonEntities)
+
+                localSourceRepository.upsertAll(pokemonEntities)
             }
 
             MediatorResult.Success(

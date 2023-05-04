@@ -66,7 +66,7 @@ fun PokemonDetailScreen(
 
     val (_, name, height, weight, types, stats, abilities, art) = pokemon
 
-    val bgColor = Types.typesWithColors[types.data.firstOrNull()] ?: defaultColor
+    val bgColor = Types.typesWithColors[types.data.first()] ?: defaultColor
 
     ConstraintLayout(modifier = modifier) {
 
