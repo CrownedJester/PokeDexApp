@@ -11,6 +11,7 @@ class StatConverter : Converter<Stats> {
 
     @TypeConverter
     override fun decodeFromString(value: String): Stats? {
+        if (value.isEmpty() || value.isBlank()) return Stats(emptyList())
         val adapter: JsonAdapter<Stats> = moshi.adapter(Stats::class.java)
 
         return adapter.fromJson(value)
