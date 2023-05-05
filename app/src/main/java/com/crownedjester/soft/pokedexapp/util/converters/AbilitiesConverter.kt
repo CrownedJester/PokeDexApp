@@ -12,6 +12,7 @@ class AbilitiesConverter : Converter<Abilities> {
 
     @TypeConverter
     override fun decodeFromString(value: String): Abilities? {
+        if (value.isBlank() || value.isEmpty()) return Abilities(emptyList())
         val adapter: JsonAdapter<Abilities> = moshi.adapter(Abilities::class.java)
 
         return adapter.fromJson(value)

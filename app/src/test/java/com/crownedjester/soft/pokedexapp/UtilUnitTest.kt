@@ -28,5 +28,14 @@ class UtilUnitTest {
         assertEquals(expected, url.parseId())
     }
 
+    @Test
+    fun parseId_wrongPrefix_isCorrect() {
+        val url = "https://pokeapi.co/api/v2/ability/"
+
+        val expected = ID_PARSER_ERROR_RESPONSE
+
+        assertEquals(expected, url.parseId())
+    }
+
 
 }

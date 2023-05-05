@@ -8,10 +8,10 @@ import org.junit.Test
 
 class ConverterUnitTest {
 
-    private val encodedData = "{\"types\":[\"shadow\",\"grass\",\"water\"]}"
+    private val encodedData = "{\"data\":[\"shadow\",\"grass\",\"water\"]}"
     private val typesConverter = TypesConverter()
 
-    private val data = Types(
+    private val types = Types(
         listOf(
             "shadow", "grass", "water"
         )
@@ -19,26 +19,31 @@ class ConverterUnitTest {
 
     @Test
     fun typesConverter_decoding_isCorrect() {
-        val expected = Types(
-            listOf(
-                "shadow", "grass", "water"
-            )
-        )
 
-        assertEquals(expected.data, typesConverter.decodeFromString(encodedData)?.data)
+        assertEquals(types.data, typesConverter.decodeFromString(encodedData)?.data)
+
+    }
+
+    @Test
+    fun typesConverter_decoding_emptyString_isCorrect() {
+        val expected = Types(
+            listOf()
+        )
+        val givenData = ""
+
+        assertEquals(expected.data, typesConverter.decodeFromString(givenData)?.data)
 
     }
 
     @Test
     fun typesConverter_encoding_isCorrect() {
-        val expected = "{\"types\":[\"shadow\",\"grass\",\"water\"]}"
 
-        assertEquals(expected, typesConverter.encodeToString(data))
+        assertEquals(encodedData, typesConverter.encodeToString(types))
     }
 
     @Test
-    fun typesConverter_encoding_emptyData_isCorrect() {
-        val expected = "{\"types\":[]}"
+    fun typesConverter_encoding_emptyList_isCorrect() {
+        val expected = "{\"data\":[]}"
         val data = Types(emptyList())
 
         assertEquals(expected, typesConverter.encodeToString(data))
