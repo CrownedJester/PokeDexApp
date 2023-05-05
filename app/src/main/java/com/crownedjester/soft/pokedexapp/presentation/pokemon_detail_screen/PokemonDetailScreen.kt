@@ -23,6 +23,7 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
@@ -173,6 +174,7 @@ fun PokemonDetailScreen(
         HorizontalPager(
             pageCount = tabs.size,
             state = pagerState,
+            verticalAlignment = Alignment.Top,
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .zIndex(TOP_LAYER_Z_INDEX)
